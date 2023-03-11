@@ -1,5 +1,4 @@
-/__pycache__/
-/printr/__pycache__/
-/dist/
-/*.egg-info/
+__pycache__
+dist
+*.egg-info
 test.py
