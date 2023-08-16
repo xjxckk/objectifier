@@ -1,9 +1,11 @@
+dict_item = dict
+
 class convert_json_to_object:
     def __new__(self, item):
-        if isinstance(item, dict):
-            updated_dict = convert_dictionary_to_object()
+        if isinstance(item, dict_item):
+            updated_dict = dict()
             for key, value in item.items():
-                if isinstance(value, (dict, list)):
+                if isinstance(value, (dict_item, list)):
                     value = convert_json_to_object(value)
                 setattr(updated_dict, key, value)
                     
@@ -11,17 +13,17 @@ class convert_json_to_object:
 
         elif isinstance(item, list):
             for index, sub_item in enumerate(item):
-                if isinstance(sub_item, (dict, list)):
+                if isinstance(sub_item, (dict_item, list)):
                     item[index] = convert_json_to_object(sub_item)
                 
             return item
 
-class convert_dictionary_to_object(dict): # https://goodcode.io/articles/python-dict-object/
+class dict(dict_item): # https://goodcode.io/articles/python-dict-object/
     def __getattr__(self, name):
         if name in self:
             return self[name]
         else:
-            raise AttributeError("No such attribute: " + name)
+            raise AttributeError(f'No such attribute: {name}')
 
     def __setattr__(self, name, value):
         self[name] = value
@@ -30,4 +32,4 @@ class convert_dictionary_to_object(dict): # https://goodcode.io/articles/python-
         if name in self:
             del self[name]
         else:
-            raise AttributeError("No such attribute: " + name)
+            raise AttributeError(f'No such attribute: {name}')
