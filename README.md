@@ -13,14 +13,12 @@ test_dict = {
         }
 
 dict_as_object = convert_json_to_object(test_dict)
-dict_as_object.name
-> 'Deckow-Crist'
 
-'catchPhrase' in dict_as_object # Retains all original dictionary methods
-> True
-```
+>>> dict_as_object.name
+'Deckow-Crist'
+>>> 'catchPhrase' in dict_as_object # Keeps all original dictionary methods
+True
 
-```
 test_list = [
     {
         'id': 1,
