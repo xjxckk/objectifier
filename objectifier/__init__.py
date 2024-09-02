@@ -1,7 +1,11 @@
+import json
 dict_item = dict
 
 class convert_json_to_object:
     def __new__(self, item):
+        if isinstance(item, str):
+            item = json.loads(item) # If json object string convert it first before objectifying
+
         if isinstance(item, dict_item):
             updated_dict = dict()
             for key, value in item.items():
